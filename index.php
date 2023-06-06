@@ -25,7 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
         <div class="grandParentContainer">
             <div class="parentContainer">
                 <div class="m-4">
-                    <form action="authenticate.php" class="needs-validation border p-3" method="post" validate>
+                    <form action="authenticate.php" class="needs-validation border p-3" method="post">
                         <div class="mb-3">
                             <label class="form-label" for="username">Username</label>
                             <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>

@@ -37,7 +37,7 @@ if (!isset($_SESSION['loggedin'])) {
         </div>
         
         <div class="content">
-            <p><?php echo 'ciao';?></p>
+            <p><?php //echo 'ciao';?></p>
         </div>
 
     </bodY>

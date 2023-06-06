@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     nome varchar(30) not null,
     cognome varchar(30) not null,
     tipo char(1) not null, -- valori ammessi S = studente, I Tutor interno, E Tutor esterno A = Admin -- MySQL non prevede i check come altri RDBMS quindi verrà gestito dall'app
-    email varchar(30) not null,
+    email varchar(50) not null,
     telefono_1 varchar(10) null,
     telefono_2 varchar(10) null,
     note text null,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     CONSTRAINT PK_username PRIMARY KEY (username)
 );
 
-INSERT INTO accounts (username, nome, cognome, tipo, email, telefono_1, telefono_2, note) VALUES ('paolob', 'paolo', 'berlanda', 'S', 'paolo.berlanda@marconirovereto.it', '3493141895', null, 'dev')
-INSERT INTO accounts (username, nome, cognome, tipo, email, telefono_1, telefono_2, note) VALUES ('admin', 'paolo', 'berlanda', 'A', 'admin@gasl.it', '3493141895', null, 'admin')
+INSERT INTO accounts (username, password, nome, cognome, tipo, email, telefono_1, telefono_2, note) VALUES ('paolob', '123456', paolo', 'berlanda', 'S', 'paolo.berlanda@marconirovereto.it', '3493141895', null, 'dev');
+INSERT INTO accounts (username, password, nome, cognome, tipo, email, telefono_1, telefono_2, note) VALUES ('admin', '123456', paolo', 'berlanda', 'A', 'admin@gasl.it', '3493141895', null, 'admin')
 
 

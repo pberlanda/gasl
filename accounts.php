@@ -80,13 +80,13 @@ $result = mysqli_query($conn, $sql);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>App CRUD - Home</title>
+    <title>GASL gestione utenti</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
     <?php require 'navbar.php';?>
     <div class="container">
-        <h1 class="mt-4">App CRUD - Home</h1>
+        <h1 class="mt-4">Gestione utenti</h1>
 
         <h2 class="mt-4">Aggiungi un nuovo utente:</h2>
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="mb-4">

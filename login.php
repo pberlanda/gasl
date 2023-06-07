@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     //$username = $_POST['username'];
     //$password = $_POST['password'];
+    
     // ottengo username e password in sicurezza
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
@@ -78,28 +79,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title>GASL Gestione Alternanza Scuola Lavoro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .login-form {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1 class="mt-4">App CRUD - Login</h1>
-
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-6">
-                <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+<body>    
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <h1 class="text-center">GASL</h1>
+                <h3 class="text-center">Gestione Alternanza Scuola Lavoro</h3>
+                <form class="login-form" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+                    <!-- Aggiungi i campi del form -->
                     <div class="form-group">
-                        <label for="username">Nome utente:</label>
-                        <input type="text" class="form-control" name="username" id="username">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Accedi</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <!-- Aggiungi le librerie JavaScript di Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

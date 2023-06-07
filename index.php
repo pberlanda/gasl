@@ -11,8 +11,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <style>
+            body {
+                background-color: #435165;
+            }
+            .login h1 {
+                text-align: center;
+                color: #5b6574;
+                font-size: 24px;
+                padding: 20px 0 20px 0;
+                border-bottom: 1px solid #dee0e4;
+            }
             .grandParentContainer{
-                display:table; height:100%; margin: 0 auto; border:3px;
+                display:table; height:100%; margin: 0 auto; border:3px; background-color: #ffffff; margin-top: 50px;
             }
 
             .parentContainer{
@@ -27,19 +37,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
                 <div class="m-4">
                     <form action="authenticate.php" class="needs-validation border p-3" method="post">
                         <div class="mb-3">
-                            <label class="form-label" for="username">Username</label>
+                            <div class="login">
+                                <h1>Login GASL</h1>
+                            </div>
+<!--                            <label class="form-label" for="username">Username</label>-->
                             <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
                             <div class="invalid-feedback">Inserire username</div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="inputPassword">Password</label>
+<!--                            <label class="form-label" for="inputPassword">Password</label>-->
                             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                             <div class="invalid-feedback">Inserire la password per continuare</div>
                         </div>
                         <div class="mb-3">
-                            <div class="form-check">
-                                
-                            </div>
+<!--                        <div class="form-check"></div>-->
                             <button type="submit" class="btn btn-primary">Sign in</button>
                         </div>
                     </form>

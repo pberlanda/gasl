@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/GestioneAlternanzaScuolaLavoro/authenticate.php</file>
-            <file>file:/C:/xampp/htdocs/GestioneAlternanzaScuolaLavoro/index.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/login.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/error.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/securityUtils.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/accounts.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/home.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/navbar.php</file>
         </group>
     </open-files>
 </project-private>

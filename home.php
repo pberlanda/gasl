@@ -1,44 +1,34 @@
 <?php
-
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
-// avvia la sessione
 session_start();
-// se l'utente non è loggato lo mando alla pagina di login
-if (!isset($_SESSION['loggedin'])) {
-    header('Location:index.html');
+include './securityUtils.php';
+
+// Verifica se l'utente è autenticato
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: login.php');
+    exit;
 }
+
+// Ottieni il nome dell'utente corrente
+$currentUsername = $_SESSION['id'];
 ?>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Home page</title>
-        <link href="style.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    </head>
-    <body class="loggedin">
-        <nav class="navtop">
-            <div>
-                <h1>Il mio sito</h1>
-                <a href="#"><i></i>Test 1</a>
-                <a href="#"><i></i>Test 2</a>
-                <a href="#"><i></i>Test 3</a>
-                <a href="profile.php"><i class="fas fa-user-circle"></i>Profilo</a>
-                <a href="logout.php"><i class="fas fa-sign-out"></i>Logout</a>
-            </div>
-        </nav>
-        <div class="content">
-            <h2>Home page</h2>
-            <p>Bentornato, <?=$_SESSION['name']?>!</p>
-        </div>
-        
-        <div class="content">
-            <p><?php //echo 'ciao';?></p>
-        </div>
+<head>
+    <title>Home Page</title>
+    <!-- Aggiungi le librerie di Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <?php require 'navbar.php';?>
+    <!-- Contenuto principale della pagina -->
+    <div class="container mt-4">
+        <h1>Contenuto della Home Page</h1>
+        <!-- Aggiungi il contenuto specifico della tua home page -->
+    </div>
 
-    </bodY>
+</body>
 </html>

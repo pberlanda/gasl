@@ -29,8 +29,14 @@
 <body>
     <div class="error-container">
         <h1>Errore</h1>
-        <p>Si è verificato un errore durante l'esecuzione dello script.</p>
-        <p>Riprova più tardi o contatta l'amministratore di sistema.</p>
+        <?php
+        // Ottieni il messaggio di errore dalla query string
+        $error_message = $_GET['message'];
+
+        // Mostra il messaggio di errore
+        echo $error_message;
+        ?>
+        <p>L'app è in fase di sviluppo.<br>Riprova più tardi o contatta l'amministratore di sistema.</p>
     </div>
 </body>
 </html>

@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     CONSTRAINT PK_username PRIMARY KEY (username)
 );
 
-INSERT INTO accounts (username, password, nome, cognome, tipo, email, telefono_1, telefono_2, note) VALUES ('paolob', '123456', paolo', 'berlanda', 'S', 'paolo.berlanda@marconirovereto.it', '3493141895', null, 'dev');
-INSERT INTO accounts (username, password, nome, cognome, tipo, email, telefono_1, telefono_2, note) VALUES ('admin', '123456', paolo', 'berlanda', 'A', 'admin@gasl.it', '3493141895', null, 'admin')
+INSERT INTO accounts (username, password, nome, cognome, tipo, email, telefono_1, telefono_2, note) VALUES ('paolob', '123456', 'paolo', 'berlanda', 'S', 'paolo.berlanda@marconirovereto.it', '3493141895', null, 'dev');
+INSERT INTO accounts (username, password, nome, cognome, tipo, email, telefono_1, telefono_2, note) VALUES ('admin', '123456', 'Guido', 'Lape', 'A', 'admin@gasl.it', '3493141895', null, 'admin')
 
 

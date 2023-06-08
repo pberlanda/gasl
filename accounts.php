@@ -27,11 +27,25 @@ if (!$conn) {
 
 // Operazione di creazione di un nuovo utente
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
-    $nome = $_POST["nome"];
-    $cognome = $_POST["cognome"];
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    $email = $_POST["email"];
+//    $nome = $_POST["nome"];
+//    $cognome = $_POST["cognome"];
+//    $username = $_POST["username"];
+//    $password = $_POST["password"];
+//    $email = $_POST["email"];
+    
+    //ottengo i dati da memorizzare
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+    $cognome = filter_input(INPUT_POST, 'cognome', FILTER_SANITIZE_STRING);
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+    
+    // controlla se lo username è già stato usato da un altro utente
+    if (verificaUsernameUtilizzato($conn, $username)) {
+        $error_message = "Lo username $username è già stato utilizzato!<br>Scegli un altro username";
+        visualizzaErrore($error_message);
+        exit;
+    }
     
     // password con hash
     $hashedPassword = generaHashedPassword($password);
@@ -58,7 +72,8 @@ if (isset($_GET["delete"])) {
     if ($id === $loggedinUser) {
         // l'utente sta cercando di eliminare se stesso. Gestisco l'errore con la pagina errori
         $error_message = "Non è possibile eliminare il proprio utente";
-        header('Location: error.php?message='.urldecode($error_message));
+        //header('Location: error.php?message='.urldecode($error_message));
+        visualizzaErrore($error_message);
         exit;
     }
     
@@ -87,7 +102,6 @@ $result = mysqli_query($conn, $sql);
     <?php require 'navbar.php';?>
     <div class="container">
         <h1 class="mt-4">Gestione utenti</h1>
-
         <h2 class="mt-4">Aggiungi un nuovo utente:</h2>
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="mb-4">
             <div class="form-group">
@@ -134,7 +148,11 @@ $result = mysqli_query($conn, $sql);
                         echo "<td>" . $row["cognome"] . "</td>";
                         echo "<td>" . $row["username"] . "</td>";
                         echo "<td>" . $row["email"] . "</td>";
-                        echo "<td><a href='?delete=" . $row["username"] . "' class='btn btn-danger btn-sm'>Elimina</a></td>";
+                        // la riga commentata ha elimina. Sostituita da td contentente modifica ed elimina
+//                      // echo "<td><a href='edit.php?id=" . $row["username"]. "' class='btn btn-primary btn-sm'>Modifica</a></td>";
+                        echo "<td>";
+                        echo "<a href='edit.php?id=" . $row["username"]. "' class='btn btn-primary btn-sm'>Modifica</a> <a href='?delete=" . $row["username"] . "' class='btn btn-danger btn-sm'>Elimina</a>";
+                        echo "</td>";
                         echo "</tr>";
                     }
                 } else {

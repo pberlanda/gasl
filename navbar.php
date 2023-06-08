@@ -4,9 +4,11 @@
 $currentUsername = $_SESSION['id'];
 ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="home.php">GASL</a>
+        <a class="navbar-brand" href="home.php"><i class="fas fa-home"></i> GASL</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,7 +16,7 @@ $currentUsername = $_SESSION['id'];
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="accounts.php">Utenti</a>
+                    <a class="nav-link" href="accounts.php"><i class="fas fa-solid fa-user"></i> Utenti</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="pagina2.php">Pagina 2</a>

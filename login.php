@@ -68,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     } else {
         $error_message = 'Credenziali non valide. Riprova.';
-        header('Location: error.php?message='.urlencode($error_message));
+        //header('Location: error.php?message='.urlencode($error_message));
+        visualizzaErrore($error_message);
         exit;
     }
 }
@@ -80,10 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>GASL Gestione Alternanza Scuola Lavoro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
+        body {
+            background-color: #eaeae1;
+        }
         .login-form {
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
             padding: 20px;
+            background-color: #ffffff
         }
     </style>
 </head>
@@ -91,10 +96,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6">
-                <h1 class="text-center">GASL</h1>
-                <h3 class="text-center">Gestione Alternanza Scuola Lavoro</h3>
                 <form class="login-form" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                     <!-- Aggiungi i campi del form -->
+                    <div class="form-group">
+                        <h1 class="text-center">GASL</h1>
+                        <h3 class="text-center">Gestione Alternanza Scuola Lavoro</h3>
+                    </div>
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>

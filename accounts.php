@@ -172,57 +172,7 @@ $result = mysqli_query($conn, $sql);
     </div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script>
-        function verificaDisponibilitaUsername() {
-            var username = document.getElementById("username").value;
-            var errorSpan = document.getElementById("username-error");
-            
-            // debug: test
-            //window.alert("ciao" + " " + username);
-            
-            // Effettua una richiesta AJAX al server per verificare l'username
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "checkUsername.php?username=" + encodeURIComponent(username), true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-
-                    // Controlla la risposta del server
-                    if (response.available) {
-                        errorSpan.textContent = ""; // Lo username è disponibile, nessun messaggio di errore
-                    } else {
-                        errorSpan.textContent = "Lo username '" + username + "' è già stato utilizzato.";
-                    }
-                }
-            };
-            xhr.send();
-        }
-    </script>
-    <script>
-        function verificaDisponibilitaEmail() {
-            var username = document.getElementById("username").value;
-            var email = document.getElementById("email").value;
-            var errorSpan = document.getElementById("email-error");
-            
-            // Effettua una richiesta AJAX al server per verificare che l'email non sia stata registrata per un altro utente
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "checkEmail.php?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email), true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-
-                    // Controlla la risposta del server
-                    if (response.available) {
-                        errorSpan.textContent = ""; // Lo username è disponibile, nessun messaggio di errore
-                    } else {
-                        errorSpan.textContent = email + "' è già stata utilizzata.";
-                    }
-                }
-            };
-            xhr.send();
-        }
-    </script>
-    
+    <script src="controlli.js"></script>
 </body>
 </html>
 

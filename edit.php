@@ -15,11 +15,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 // Connessione al database
 $servername = "localhost";
-$username = "root";
+$dbusername = "root";
 $password = "";
 $dbname = "gasl";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($servername, $dbusername, $password, $dbname);
 
 // Controllo della connessione
 if (!$conn) {
@@ -104,10 +104,10 @@ $email = $row["email"];
                 <label for="cognome">Cognome:</label>
                 <input type="text" class="form-control" name="cognome" id="cognome" value="<?php echo $cognome; ?>" required>
             </div>
-<!--            <div class="form-group">sono
+            <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" name="username" id="username" value="<?php echo $username; ?>" required>
-            </div>-->
+            </div>
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>" required>

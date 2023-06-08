@@ -25,7 +25,7 @@ if (!$conn) {
     die("Connessione al database fallita: " . mysqli_connect_error());
 }
 
-// Operazione di creazione di un nuovo utente
+// Creazione di un nuovo utente
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 //    $nome = $_POST["nome"];
 //    $cognome = $_POST["cognome"];
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     mysqli_query($conn, $sql);
 }
 
-// Operazione di eliminazione di un utente
+// Eliminazione di un utente
 if (isset($_GET["delete"])) {
     // id dell'utente da eliminare
     $id = $_GET["delete"];
@@ -87,8 +87,13 @@ if (isset($_GET["delete"])) {
     mysqli_query($conn, $sql);
 }
 
-// Query per selezionare tutti gli accounts
-$sql = "SELECT * FROM accounts";
+// impostazioni per ordinamento
+$order = isset($_GET['order']) ? $_GET['order'] : 'username'; // Ordina per username per impostazione predefinita
+$direction = isset($_GET['direction']) ? $_GET['direction'] : 'asc'; // Ordinamento ascendente per impostazione predefinita
+
+// Query per selezionare tutti gli account con l'ordinamento desiderato
+$sql = "SELECT * FROM accounts ORDER BY " . $order . " " . $direction;
+//$sql = "SELECT * FROM accounts";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -100,7 +105,7 @@ $result = mysqli_query($conn, $sql);
 </head>
 <body>
     <?php require 'navbar.php';?>
-    <div class="container">
+    <div class="container mt-4">
         <h1 class="mt-4">Gestione utenti</h1>
         <h2 class="mt-4">Aggiungi un nuovo utente:</h2>
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="mb-4">
@@ -135,7 +140,8 @@ $result = mysqli_query($conn, $sql);
                 <tr>
                     <th>Nome</th>
                     <th>Cognome</th>
-                    <th>Username</th>
+                    <!--<th>Username</th>-->
+                    <th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>
                     <th>Email</th>
                     <th>Azioni</th>
                 </tr>

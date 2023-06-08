@@ -19,7 +19,7 @@ $currentUsername = $_SESSION['id'];
                     <a class="nav-link" href="accounts.php"><i class="fas fa-solid fa-user"></i> Utenti</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pagina2.php">Pagina 2</a>
+                    <a class="nav-link" href="stage.php">Stage</a>
                 </li>
                 <!-- Aggiungi altre voci di menu per le tue pagine -->
             </ul>

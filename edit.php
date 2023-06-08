@@ -2,6 +2,11 @@
 session_start();
 include 'securityUtils.php';
 
+// gestione errori
+// anzichè usare la funzione in secirityYtils che reindirizza alla pagna error.php dedicata,
+// visualizzo un msg nella pagina
+$error = "";
+
 // Verifica se l'utente è autenticato
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: login.php');
@@ -45,11 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
     
     // verifica se username è già stato utilizzato
-    if (verificaUsernameUtilizzato($conn, $username)) {
-        $error_message = "Il nome utente $username è già utilizzato!";
-        visualizzaErrore($error_message);
-        exit;
-    }
+//    if (verificaUsernameUtilizzato($conn, $username)) {
+//        $error_message = "Il nome utente $username è già utilizzato!";
+//        visualizzaErrore($error_message);
+//        exit;
+//    }
 
     // Esegui l'aggiornamento dell'utente nel database
     $sql = "UPDATE accounts SET nome='$nome', cognome='$cognome', username='$username', email='$email' WHERE username='$id'";
@@ -99,10 +104,10 @@ $email = $row["email"];
                 <label for="cognome">Cognome:</label>
                 <input type="text" class="form-control" name="cognome" id="cognome" value="<?php echo $cognome; ?>" required>
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">sono
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" name="username" id="username" value="<?php echo $username; ?>" required>
-            </div>
+            </div>-->
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>" required>

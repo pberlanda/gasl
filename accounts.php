@@ -106,23 +106,25 @@ $result = mysqli_query($conn, $sql);
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="mb-4">
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input type="text" class="form-control" name="nome" id="nome">
+                <input type="text" class="form-control" name="nome" id="nome" required>
             </div>
             <div class="form-group">
                 <label for="cognome">Cognome:</label>
-                <input type="text" class="form-control" name="cognome" id="cognome">
+                <input type="text" class="form-control" name="cognome" id="cognome" required>
             </div>
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control" name="username" id="username">
+                <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
+                <span id="username-error" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" name="email" id="email">
+                <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()"> <!-- verifica che l'email non sia già stata utilizzata -->
+                <span id="email-error" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control" name="password" id="password">
+                <input type="password" class="form-control" name="password" id="password" required>
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Aggiungi</button>
         </form>
@@ -164,6 +166,57 @@ $result = mysqli_query($conn, $sql);
     </div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        function verificaDisponibilitaUsername() {
+            var username = document.getElementById("username").value;
+            var errorSpan = document.getElementById("username-error");
+            
+            // debug: test
+            //window.alert("ciao" + " " + username);
+            
+            // Effettua una richiesta AJAX al server per verificare l'username
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "checkUsername.php?username=" + encodeURIComponent(username), true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+
+                    // Controlla la risposta del server
+                    if (response.available) {
+                        errorSpan.textContent = ""; // Lo username è disponibile, nessun messaggio di errore
+                    } else {
+                        errorSpan.textContent = "Lo username '" + username + "' è già stato utilizzato.";
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+    <script>
+        function verificaDisponibilitaEmail() {
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var errorSpan = document.getElementById("email-error");
+            
+            // Effettua una richiesta AJAX al server per verificare che l'email non sia stata registrata per un altro utente
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "checkEmail.php?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email), true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+
+                    // Controlla la risposta del server
+                    if (response.available) {
+                        errorSpan.textContent = ""; // Lo username è disponibile, nessun messaggio di errore
+                    } else {
+                        errorSpan.textContent = email + "' è già stata utilizzata.";
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+    
 </body>
 </html>
 

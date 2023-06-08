@@ -29,7 +29,9 @@ function verificaUsernameUtilizzato($conn, $username) {
     }
 }
 
+// Gestione errori: reindirizzamento a pagina dedicata
 function visualizzaErrore($error_msg) {
     header('Location: error.php?message=' . urldecode($error_msg));
 }
-// TODO Altre funzioni? utente, santize ecc??? da fare
+
+// TODO Altre funzioni? utente, sanitize ecc??? da fare

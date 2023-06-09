@@ -14,11 +14,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 // Connessione al database
 $servername = "localhost";
-$username = "root";
+$dbusername = "root";
 $password = "";
 $dbname = "gasl";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($servername, $dbusername, $password, $dbname);
 
 // Controllo della connessione
 if (!$conn) {
@@ -110,26 +110,54 @@ $result = mysqli_query($conn, $sql);
         <h2 class="mt-4">Aggiungi un nuovo utente:</h2>
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="mb-4">
             <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" class="form-control" name="nome" id="nome" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="nome">Nome:</label>
+                        <input type="text" class="form-control" name="nome" id="nome" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cognome">Cognome:</label>
+                        <input type="text" class="form-control" name="cognome" id="cognome" required>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="cognome">Cognome:</label>
-                <input type="text" class="form-control" name="cognome" id="cognome" required>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
+                        <span id="username-error" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()"> <!-- verifica che l'email non sia già stata utilizzata -->
+                        <span id="email-error" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
-                <span id="username-error" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="tel1">Tel.:</label>
+                        <input type="tel1" class="form-control" name="tel1" id="tel1">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="tel2">Tel.:</label>
+                        <input type="tel2" class="form-control" name="tel2" id="tel2">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()"> <!-- verifica che l'email non sia già stata utilizzata -->
-                <span id="email-error" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" name="password" id="password" required>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" name="password" id="password" required>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="note">Note:</label>
+                        <input type="text" class="form-control" name="note" id="note">
+                    </div>
+                </div>
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Aggiungi</button>
         </form>

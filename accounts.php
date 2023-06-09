@@ -15,10 +15,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 // Connessione al database
 $servername = "localhost";
 $dbusername = "root";
-$password = "";
+$dbpassword = "";
 $dbname = "gasl";
 
-$conn = mysqli_connect($servername, $dbusername, $password, $dbname);
+$conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
 // Controllo della connessione
 if (!$conn) {
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-    
+    //echo '$username';
     // controlla se lo username è già stato usato da un altro utente
     if (verificaUsernameUtilizzato($conn, $username)) {
         $error_message = "Lo username $username è già stato utilizzato!<br>Scegli un altro username";

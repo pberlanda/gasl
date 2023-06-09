@@ -123,12 +123,16 @@ $result = mysqli_query($conn, $sql);
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="username">Username:</label>
                         <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
                         <span id="username-error" class="text-danger"></span>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-3">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" name="password" id="password" required>
+                    </div>
+                    <div class="col-md-6">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()"> <!-- verifica che l'email non sia già stata utilizzata -->
                         <span id="email-error" class="text-danger"></span>
@@ -148,16 +152,8 @@ $result = mysqli_query($conn, $sql);
                 </div>
             </div>
             <div class="form-group">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password" required>
-                    </div>
-                    <div class="col-md-8">
-                        <label for="note">Note:</label>
-                        <input type="text" class="form-control" name="note" id="note">
-                    </div>
-                </div>
+                <label for="note">Note:</label>
+                <input type="text" class="form-control" name="note" id="note">
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Aggiungi</button>
         </form>

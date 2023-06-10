@@ -39,6 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+    $telefono1 = filter_input(INPUT_POST, 'telefono_1', FILTER_SANITIZE_STRING);
+    $telefono2 = filter_input(INPUT_POST, 'telefono_2', FILTER_SANITIZE_STRING);
     //echo '$username';
     // controlla se lo username è già stato usato da un altro utente
     if (verificaUsernameUtilizzato($conn, $username)) {
@@ -54,9 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     /*echo "utente da inserire ".$id;
     echo "comando SQL ".$sql;*/
     // Esegui la query di inserimento
-    $sql = "INSERT INTO accounts (nome, cognome, username, password, email)
-            VALUES ('$nome', '$cognome', '$username', '$password', '$email')";
-    mysqli_query($conn, $sql);
+    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2)
+            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$telefono_1', '$telefono_2')";
+    //mysqli_query($conn, $sql);
+    
+    if (!mysql_query($conn, $sql)) {
+        $error_msg = "ok";
+        visualizzaErrore($error_msg);
+        exit();
+    }
 }
 
 // Eliminazione di un utente
@@ -142,8 +150,8 @@ $result = mysqli_query($conn, $sql);
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="tel1">Tel.:</label>
-                        <input type="tel1" class="form-control" name="tel1" id="tel1">
+                        <label for="telefono_1">Tel.:</label>
+                        <input type="telefono_1" class="form-control" name="telefono_1" id="telefono_1">
                     </div>
                     <div class="col-md-6">
                         <label for="tel2">Tel.:</label>
@@ -165,7 +173,7 @@ $result = mysqli_query($conn, $sql);
                     <th>Nome</th>
                     <th>Cognome</th>
                     <!--<th>Username</th>-->
-                    <th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>
+                    <!--<th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>-->
                     <th>Email</th>
                     <th>Azioni</th>
                 </tr>
@@ -178,7 +186,7 @@ $result = mysqli_query($conn, $sql);
                         echo "<tr>";
                         echo "<td>" . $row["nome"] . "</td>";
                         echo "<td>" . $row["cognome"] . "</td>";
-                        echo "<td>" . $row["username"] . "</td>";
+                        //echo "<td>" . $row["username"] . "</td>";
                         echo "<td>" . $row["email"] . "</td>";
                         // la riga commentata ha elimina. Sostituita da td contentente modifica ed elimina
 //                      // echo "<td><a href='edit.php?id=" . $row["username"]. "' class='btn btn-primary btn-sm'>Modifica</a></td>";

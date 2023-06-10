@@ -22,7 +22,9 @@ $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
 // Controllo della connessione
 if (!$conn) {
-    die("Connessione al database fallita: " . mysqli_connect_error());
+    $error_msg = "Connessione al database fallita: " . mysqli_connect_error();
+    visualizzaErrore($error_msg);
+    die($error_msg);
 }
 
 // Creazione di un nuovo utente
@@ -41,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
     $telefono1 = filter_input(INPUT_POST, 'telefono_1', FILTER_SANITIZE_STRING);
     $telefono2 = filter_input(INPUT_POST, 'telefono_2', FILTER_SANITIZE_STRING);
-    //echo '$username';
+    //echo $username.$telefono1.$telefono2;
     // controlla se lo username è già stato usato da un altro utente
     if (verificaUsernameUtilizzato($conn, $username)) {
         $error_message = "Lo username $username è già stato utilizzato!<br>Scegli un altro username";
@@ -56,8 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     /*echo "utente da inserire ".$id;
     echo "comando SQL ".$sql;*/
     // Esegui la query di inserimento
-    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2)
-            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$telefono_1', '$telefono_2')";
+    $sql = "INSERT INTO accounts (nome, cognome, username, password, email)
+            VALUES ('$nome', '$cognome', '$username', '$password', '$email')";
     //mysqli_query($conn, $sql);
     
     if (!mysql_query($conn, $sql)) {
@@ -173,7 +175,7 @@ $result = mysqli_query($conn, $sql);
                     <th>Nome</th>
                     <th>Cognome</th>
                     <!--<th>Username</th>-->
-                    <!--<th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>-->
+                    <th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>
                     <th>Email</th>
                     <th>Azioni</th>
                 </tr>
@@ -186,9 +188,9 @@ $result = mysqli_query($conn, $sql);
                         echo "<tr>";
                         echo "<td>" . $row["nome"] . "</td>";
                         echo "<td>" . $row["cognome"] . "</td>";
-                        //echo "<td>" . $row["username"] . "</td>";
+                        echo "<td>" . $row["username"] . "</td>";
                         echo "<td>" . $row["email"] . "</td>";
-                        // la riga commentata ha elimina. Sostituita da td contentente modifica ed elimina
+                        // la riga commentata ha solo btn elimina. Sostituita da td contentente modifica ed elimina
 //                      // echo "<td><a href='edit.php?id=" . $row["username"]. "' class='btn btn-primary btn-sm'>Modifica</a></td>";
                         echo "<td>";
                         echo "<a href='edit.php?id=" . $row["username"]. "' class='btn btn-primary btn-sm'>Modifica</a> <a href='?delete=" . $row["username"] . "' class='btn btn-danger btn-sm'>Elimina</a>";

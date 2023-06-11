@@ -55,8 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $hashedPassword = generaHashedPassword($password);
     
     // debug: test funzionamento insert
-    /*echo "utente da inserire ".$id;
-    echo "comando SQL ".$sql;*/
+    //echo '<script>ciao</script>';
+    //echo "<script>utente da inserire ".$id."</script>";
+    //echo "<script>comando SQL ".$sql."</script>";
     // Esegui la query di inserimento
     $sql = "INSERT INTO accounts (nome, cognome, username, password, email)
             VALUES ('$nome', '$cognome', '$username', '$password', '$email')";
@@ -135,7 +136,7 @@ $result = mysqli_query($conn, $sql);
                 <div class="row">
                     <div class="col-md-3">
                         <label for="username">Username:</label>
-                        <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
+                        <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()">  <!-- verifica che il nome utente sia disponibile-->
                         <span id="username-error" class="text-danger"></span>
                     </div>
                     <div class="col-md-3">
@@ -144,7 +145,7 @@ $result = mysqli_query($conn, $sql);
                     </div>
                     <div class="col-md-6">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()"> <!-- verifica che l'email non sia già stata utilizzata -->
+                        <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()">  <!-- verifica che l'email non sia già stata utilizzata -->
                         <span id="email-error" class="text-danger"></span>
                     </div>
                 </div>
@@ -161,6 +162,7 @@ $result = mysqli_query($conn, $sql);
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label for="note">Note:</label>
                 <input type="text" class="form-control" name="note" id="note">

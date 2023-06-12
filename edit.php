@@ -14,12 +14,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 // Connessione al database
-$servername = "localhost";
-$dbusername = "root";
-$password = "";
-$dbname = "gasl";
+$dbservername = "sql7.freemysqlhosting.net";
+$dbusername = "sql7625596";
+$dbpassword = "uc4beTuq59";
+$dbname = "sql7625596";
 
-$conn = mysqli_connect($servername, $dbusername, $password, $dbname);
+$conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 
 // Controllo della connessione
 if (!$conn) {

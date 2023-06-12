@@ -11,10 +11,10 @@ include 'securityUtils.php';
 function verifyCredentials($username, $password) {
     // Esempio di verifica delle credenziali nel database
     // Connessione al database
-    $servername = "localhost";
-    $dbusername = "root";
-    $dbpassword = "";
-    $dbname = "gasl";
+    $servername = "sql7.freemysqlhosting.net";
+    $dbusername = "sql7625596";
+    $dbpassword = "uc4beTuq59";
+    $dbname = "sql7625596";
 
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
     if (!$conn) {

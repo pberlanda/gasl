@@ -13,10 +13,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 // Connessione al database
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "gasl";
+$servername = "sql7.freemysqlhosting.net";
+$dbusername = "sql7625596";
+$dbpassword = "uc4beTuq59";
+$dbname = "sql7625596";
 
 $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
@@ -176,8 +176,8 @@ $result = mysqli_query($conn, $sql);
                 <tr>
                     <th>Nome</th>
                     <th>Cognome</th>
-                    <!--<th>Username</th>-->
-                    <th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>
+                    <th>Username</th>
+                    <!--<th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>-->
                     <th>Email</th>
                     <th>Azioni</th>
                 </tr>

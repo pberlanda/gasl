@@ -1,9 +1,9 @@
 <?php
 // Connessione al database
-$dbservername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "gasl";
+$dbservername = "sql7.freemysqlhosting.net";
+$dbusername = "sql7625596";
+$dbpassword = "uc4beTuq59";
+$dbname = "sql7625596";
 
 $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 

@@ -1,9 +1,11 @@
 <?php
-// Connessione al database
-$dbservername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "gasl";
+// carica i parametri di connessione dal file XML
+$config = simplexml_load_file('config.xml');
+
+$servername = $config->database->dbhost;
+$dbusername = $config->database->dbusername;
+$dbpassword = $config->database->dbpassword;
+$dbname = $config->database->dbname;
 
 $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 

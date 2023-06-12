@@ -13,13 +13,15 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit;
 }
 
-// Connessione al database
-$servername = "localhost";
-$dbusername = "root";
-$password = "";
-$dbname = "gasl";
+// carica i parametri di connessione dal file XML
+$config = simplexml_load_file('config.xml');
 
-$conn = mysqli_connect($servername, $dbusername, $password, $dbname);
+$servername = $config->database->dbhost;
+$dbusername = $config->database->dbusername;
+$dbpassword = $config->database->dbpassword;
+$dbname = $config->database->dbname;
+
+$conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 
 // Controllo della connessione
 if (!$conn) {

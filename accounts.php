@@ -12,17 +12,21 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit;
 }
 
-// Connessione al database
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "gasl";
+// carica i parametri di connessione dal file XML
+$config = simplexml_load_file('config.xml');
+
+$servername = $config->database->dbhost;
+$dbusername = $config->database->dbusername;
+$dbpassword = $config->database->dbpassword;
+$dbname = $config->database->dbname;
 
 $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
 // Controllo della connessione
 if (!$conn) {
-    die("Connessione al database fallita: " . mysqli_connect_error());
+    $error_msg = "Connessione al database fallita: " . mysqli_connect_error();
+    visualizzaErrore($error_msg);
+    die($error_msg);
 }
 
 // Creazione di un nuovo utente
@@ -39,7 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-    //echo '$username';
+    $telefono1 = filter_input(INPUT_POST, 'telefono_1', FILTER_SANITIZE_STRING);
+    $telefono2 = filter_input(INPUT_POST, 'telefono_2', FILTER_SANITIZE_STRING);
+    //echo $username.$telefono1.$telefono2;
     // controlla se lo username è già stato usato da un altro utente
     if (verificaUsernameUtilizzato($conn, $username)) {
         $error_message = "Lo username $username è già stato utilizzato!<br>Scegli un altro username";
@@ -51,12 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $hashedPassword = generaHashedPassword($password);
     
     // debug: test funzionamento insert
-    /*echo "utente da inserire ".$id;
-    echo "comando SQL ".$sql;*/
+    //echo '<script>ciao</script>';
+    //echo "<script>utente da inserire ".$id."</script>";
+    //echo "<script>comando SQL ".$sql."</script>";
     // Esegui la query di inserimento
     $sql = "INSERT INTO accounts (nome, cognome, username, password, email)
             VALUES ('$nome', '$cognome', '$username', '$password', '$email')";
     mysqli_query($conn, $sql);
+    
 }
 
 // Eliminazione di un utente
@@ -123,14 +131,18 @@ $result = mysqli_query($conn, $sql);
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="username">Username:</label>
-                        <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
+                        <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()">  <!-- verifica che il nome utente sia disponibile-->
                         <span id="username-error" class="text-danger"></span>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-3">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" name="password" id="password" required>
+                    </div>
+                    <div class="col-md-6">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()"> <!-- verifica che l'email non sia già stata utilizzata -->
+                        <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()">  <!-- verifica che l'email non sia già stata utilizzata -->
                         <span id="email-error" class="text-danger"></span>
                     </div>
                 </div>
@@ -138,8 +150,8 @@ $result = mysqli_query($conn, $sql);
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="tel1">Tel.:</label>
-                        <input type="tel1" class="form-control" name="tel1" id="tel1">
+                        <label for="telefono_1">Tel.:</label>
+                        <input type="telefono_1" class="form-control" name="telefono_1" id="telefono_1">
                     </div>
                     <div class="col-md-6">
                         <label for="tel2">Tel.:</label>
@@ -147,17 +159,10 @@ $result = mysqli_query($conn, $sql);
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password" required>
-                    </div>
-                    <div class="col-md-8">
-                        <label for="note">Note:</label>
-                        <input type="text" class="form-control" name="note" id="note">
-                    </div>
-                </div>
+                <label for="note">Note:</label>
+                <input type="text" class="form-control" name="note" id="note">
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Aggiungi</button>
         </form>
@@ -168,8 +173,8 @@ $result = mysqli_query($conn, $sql);
                 <tr>
                     <th>Nome</th>
                     <th>Cognome</th>
-                    <!--<th>Username</th>-->
-                    <th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>
+                    <th>Username</th>
+                    <!--<th>Username <a href="?order=username&amp;direction=asc">&uarr;</a> <a href="?order=username&amp;direction=desc">&darr;</a></th>-->
                     <th>Email</th>
                     <th>Azioni</th>
                 </tr>
@@ -184,7 +189,7 @@ $result = mysqli_query($conn, $sql);
                         echo "<td>" . $row["cognome"] . "</td>";
                         echo "<td>" . $row["username"] . "</td>";
                         echo "<td>" . $row["email"] . "</td>";
-                        // la riga commentata ha elimina. Sostituita da td contentente modifica ed elimina
+                        // la riga commentata ha solo btn elimina. Sostituita da td contentente modifica ed elimina
 //                      // echo "<td><a href='edit.php?id=" . $row["username"]. "' class='btn btn-primary btn-sm'>Modifica</a></td>";
                         echo "<td>";
                         echo "<a href='edit.php?id=" . $row["username"]. "' class='btn btn-primary btn-sm'>Modifica</a> <a href='?delete=" . $row["username"] . "' class='btn btn-danger btn-sm'>Elimina</a>";

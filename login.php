@@ -9,18 +9,21 @@ include 'securityUtils.php';
 
 // Funzione per verificare le credenziali dell'utente
 function verifyCredentials($username, $password) {
-    // Esempio di verifica delle credenziali nel database
-    // Connessione al database
-    $servername = "localhost";
-    $dbusername = "root";
-    $dbpassword = "";
-    $dbname = "gasl";
+    
+    // carica i parametri di connessione dal file XML
+    $config = simplexml_load_file('config.xml');
+
+    $servername = $config->database->dbhost;
+    $dbusername = $config->database->dbusername;
+    $dbpassword = $config->database->dbpassword;
+    $dbname = $config->database->dbname;
 
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+
     if (!$conn) {
         die("Connessione al database fallita: " . mysqli_connect_error());
     }
-    
+
     // recupera l'hash della password memorizzata
     //$passwordMemorizzata = password_hash($password, PASSWORD_DEFAULT);
 

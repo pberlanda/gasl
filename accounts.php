@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+    $tel1 = filter_input(INPUT_POST, '$tel1', FILTER_SANITIZE_STRING);
     
     // controlla se lo username è già stato usato da un altro utente
     if (verificaUsernameUtilizzato($conn, $username)) {
@@ -54,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     /*echo "utente da inserire ".$id;
     echo "comando SQL ".$sql;*/
     // Esegui la query di inserimento
-    $sql = "INSERT INTO accounts (nome, cognome, username, password, email)
-            VALUES ('$nome', '$cognome', '$username', '$password', '$email')";
+    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1)
+            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1')";
     mysqli_query($conn, $sql);
 }
 

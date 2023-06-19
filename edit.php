@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     //$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING); per ora non modifico la password... TODO procedura reset password
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+    $tel1 = filter_input(INPUT_POST, 'tel1', FILTER_SANITIZE_STRING);
     
     // verifica se username è già stato utilizzato
 //    if (verificaUsernameUtilizzato($conn, $username)) {
@@ -57,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 //    }
 
     // Esegui l'aggiornamento dell'utente nel database
-    $sql = "UPDATE accounts SET nome='$nome', cognome='$cognome', username='$username', email='$email' WHERE username='$id'";
+    $sql = "UPDATE accounts SET nome='$nome', cognome='$cognome', username='$username', email='$email', telefono_1='$tel1' WHERE username='$id'";
     mysqli_query($conn, $sql);
 
     // Reindirizza alla pagina degli utenti dopo l'aggiornamento
@@ -82,6 +83,7 @@ $nome = $row["nome"];
 $cognome = $row["cognome"];
 $username = $row["username"];
 $email = $row["email"];
+$tel1 = $row["telefono_1"];
 ?>
 
 <!-- HTML per la pagina di modifica dell'utente -->
@@ -111,6 +113,10 @@ $email = $row["email"];
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="tel1">Tel.</label>
+                <input type="tel" class="form-control" name="tel1" id="tel1" value="<?php echo $tel1;?>">
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Salva modifiche</button>
         </form>

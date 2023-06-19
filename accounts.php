@@ -141,11 +141,11 @@ $result = mysqli_query($conn, $sql);
                 <div class="row">
                     <div class="col-md-6">
                         <label for="tel1">Tel.:</label>
-                        <input type="tel1" class="form-control" name="tel1" id="tel1">
+                        <input type="tel" class="form-control" name="tel1" id="tel1">
                     </div>
                     <div class="col-md-6">
                         <label for="tel2">Tel.:</label>
-                        <input type="tel2" class="form-control" name="tel2" id="tel2">
+                        <input type="tel" class="form-control" name="tel2" id="tel2">
                     </div>
                 </div>
             </div>

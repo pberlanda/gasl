@@ -120,18 +120,11 @@ $result = mysqli_query($conn, $sql);
         <h2 class="mt-4">Aggiungi un nuovo utente:</h2>
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="mb-4">
             <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="nome">Nome:</label>
-                        <input type="text" class="form-control" name="nome" id="nome" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="cognome">Cognome:</label>
-                        <input type="text" class="form-control" name="cognome" id="cognome" required>
-                    </div>
-                </div>
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" name="nome" id="nome" required>
             </div>
             <div class="form-group">
+<<<<<<< HEAD
                 <div class="row">
                     <div class="col-md-3">
                         <label for="username">Username:</label>
@@ -160,11 +153,18 @@ $result = mysqli_query($conn, $sql);
                         <input type="tel2" class="form-control" name="tel2" id="tel2">
                     </div>
                 </div>
+=======
+                <label for="cognome">Cognome:</label>
+                <input type="text" class="form-control" name="cognome" id="cognome" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
+                <span id="username-error" class="text-danger"></span>
+>>>>>>> parent of 01fa2b4 (modifica disposizione input su account.php)
             </div>
 
             <div class="form-group">
-                <label for="note">Note:</label>
-                <input type="text" class="form-control" name="note" id="note">
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Aggiungi</button>
         </form>
@@ -215,3 +215,15 @@ $result = mysqli_query($conn, $sql);
 // Chiudi la connessione al database
 mysqli_close($conn);
 ?>
+<<<<<<< HEAD
+                <label for="note">Note:</label>
+                <input type="text" class="form-control" name="note" id="note">
+=======
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()"> <!-- verifica che l'email non sia già stata utilizzata -->
+                <span id="email-error" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+>>>>>>> parent of 01fa2b4 (modifica disposizione input su account.php)

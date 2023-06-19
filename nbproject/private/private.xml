@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/error.php</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/securityUtils.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/checkUsername.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/controlli.js</file>
             <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/edit.php</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/accounts.php</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/logout.php</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/db.sql</file>
-            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/navbar.php</file>
             <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/checkEmail.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/accounts.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/login.php</file>
+            <file>file:/C:/Users/Lenovo/Documents/GitHub/GestioneAlternanzaScuolaLavoro/db.sql</file>
         </group>
     </open-files>
 </project-private>

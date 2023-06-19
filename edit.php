@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     //$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING); per ora non modifico la password... TODO procedura reset password
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
     $tel1 = filter_input(INPUT_POST, 'tel1', FILTER_SANITIZE_STRING);
+    $tel2 = filter_input(INPUT_POST, 'tel2', FILTER_SANITIZE_STRING);
     
     // verifica se username è già stato utilizzato
 //    if (verificaUsernameUtilizzato($conn, $username)) {
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 //    }
 
     // Esegui l'aggiornamento dell'utente nel database
-    $sql = "UPDATE accounts SET nome='$nome', cognome='$cognome', username='$username', email='$email', telefono_1='$tel1' WHERE username='$id'";
+    $sql = "UPDATE accounts SET nome='$nome', cognome='$cognome', username='$username', email='$email', telefono_1='$tel1', telefono_2='$tel2' WHERE username='$id'";
     mysqli_query($conn, $sql);
 
     // Reindirizza alla pagina degli utenti dopo l'aggiornamento
@@ -84,6 +85,7 @@ $cognome = $row["cognome"];
 $username = $row["username"];
 $email = $row["email"];
 $tel1 = $row["telefono_1"];
+$tel2 = $row["telefono_2"];
 ?>
 
 <!-- HTML per la pagina di modifica dell'utente -->
@@ -99,24 +101,37 @@ $tel1 = $row["telefono_1"];
         <h1 class="mt-4">Modifica utente</h1>
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"] . '?id=' . $id; ?>" class="mb-4">
             <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" class="form-control" name="nome" id="nome" value="<?php echo $nome; ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="cognome">Cognome:</label>
-                <input type="text" class="form-control" name="cognome" id="cognome" value="<?php echo $cognome; ?>" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="nome">Nome:</label>
+                        <input type="text" class="form-control" name="nome" id="nome" value="<?php echo $nome; ?>" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cognome">Cognome:</label>
+                        <input type="text" class="form-control" name="cognome" id="cognome" value="<?php echo $cognome; ?>" required>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" name="username" id="username" value="<?php echo $username; ?>" required>
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="tel1">Tel.</label>
-                <input type="tel" class="form-control" name="tel1" id="tel1" value="<?php echo $tel1;?>">
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="tel1">Tel.</label>
+                        <input type="tel" class="form-control" name="tel1" id="tel1" value="<?php echo $tel1;?>">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="tel2">Tel.</label>
+                        <input type="tel" class="form-control" name="tel2" id="tel2" value="<?php echo $tel2;?>">
+                    </div>
+                </div>
+                
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Salva modifiche</button>
         </form>

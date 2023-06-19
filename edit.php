@@ -16,7 +16,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 // carica i parametri di connessione dal file XML
 $config = simplexml_load_file('config.xml');
 
-$servername = $config->database->dbhost;
+$dbservername = $config->database->dbhost;
 $dbusername = $config->database->dbusername;
 $dbpassword = $config->database->dbpassword;
 $dbname = $config->database->dbname;

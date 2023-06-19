@@ -20,6 +20,8 @@ $dbusername = $config->database->dbusername;
 $dbpassword = $config->database->dbpassword;
 $dbname = $config->database->dbname;
 
+echo "<script> ".$dbhost." ".$dbusername." ".$dbpassword." "." ".$dbname."</script>";
+
 $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
 // Controllo della connessione

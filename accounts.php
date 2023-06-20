@@ -128,7 +128,7 @@ $result = mysqli_query($conn, $sql);
                 <div class="row">
                     <div class="col-md-4">
                         <label for="username">Username:</label>
-                        <input type="text" class="form-control" name="username" id="username" autocomplete="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
+                        <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
                         <span id="username-error" class="text-danger"></span>
                     </div>
                     <div class="col-md-8">

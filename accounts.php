@@ -44,8 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-    $tel1 = filter_input(INPUT_POST, '$tel1', FILTER_SANITIZE_STRING);
-    $tel2 = filter_input(INPUT_POST, '$tel2', FILTER_SANITIZE_STRING);
+    $tel1 = filter_input(INPUT_POST, 'tel1', FILTER_SANITIZE_STRING);
+    $tel2 = filter_input(INPUT_POST, 'tel2', FILTER_SANITIZE_STRING);
+    $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_STRING);
     
     // controlla se lo username è già stato usato da un altro utente
     if (verificaUsernameUtilizzato($conn, $username)) {
@@ -61,8 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     /*echo "utente da inserire ".$id;
     echo "comando SQL ".$sql;*/
     // Esegui la query di inserimento
-    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2)
-            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1', '$tel2')";
+    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2, note)
+            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1', '$tel2', '$note')";
     mysqli_query($conn, $sql);
 }
 
@@ -111,7 +112,7 @@ $result = mysqli_query($conn, $sql);
     <div class="container mt-4">
         <h1 class="mt-4">Gestione utenti</h1>
         <h2 class="mt-4">Aggiungi un nuovo utente:</h2>
-        <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="mb-4">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="mb-4">
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">

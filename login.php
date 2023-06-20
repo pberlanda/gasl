@@ -7,6 +7,9 @@
 session_start();
 include 'securityUtils.php';
 
+// gestione errori: se le credenziali sono errate visualizza un messaggio di errore nel form
+$error_message = "";
+
 // Funzione per verificare le credenziali dell'utente
 function verifyCredentials($username, $password) {
     // Esempio di verifica delle credenziali nel database
@@ -55,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-// Verifica le credenziali
+    // Verifica le credenziali: se corretta passa a home.php e chiude
+    // altrimenti rimane nel form di logi ma mostra un errore
     if (verifyCredentials($username, $password)) {
         // Autentica l'utente
         $_SESSION['logged_in'] = true;
@@ -67,10 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: home.php');
         exit;
     } else {
-        $error_message = 'Credenziali non valide. Riprova.';
+        $error_message = "username o password non corretti";
         //header('Location: error.php?message='.urlencode($error_message));
-        visualizzaErrore($error_message);
-        exit;
+        //visualizzaErrore($error_message);
+        //exit;
     }
 }
 ?>
@@ -110,6 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password" autocomplete="current-password" required>
                     </div>
+                    <?php if (!$error_message == "") : ?>
+                    <div class="alert alert-danger"><?php echo $error_message; ?></div>
+                    <?php endif; ?>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
             </div>

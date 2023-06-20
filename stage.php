@@ -29,6 +29,5 @@ $currentUsername = $_SESSION['id'];
         <h1>Stage</h1>
         <!-- Aggiungi il contenuto specifico della tua home page -->
     </div>
-
 </body>
 </html>

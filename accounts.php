@@ -154,7 +154,7 @@ $result = mysqli_query($conn, $sql);
                 <div class="row">
                     <div class="col-md-4">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password" autocomplete="current-password" required>
+                        <input type="password" class="form-control" name="password" id="password" required>
                     </div>
                     <div class="col-md-8">
                         <label for="note">Note:</label>

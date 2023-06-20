@@ -6,6 +6,11 @@
 session_start();
 include 'securityUtils.php';
 
+$action = htmlspecialchars($_SESSION['logged_in']);
+
+//echo var_dump('ciao '.$action);
+//echo "<script>console.log('$action')</script>";
+
 // Verifica se l'utente è autenticato
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: login.php');
@@ -79,10 +84,6 @@ if (isset($_GET["delete"])) {
         exit;
     }
     
-    // debug: test funzionamento delete
-    /*echo "utente da aliminare ".$id;
-    echo "comando SQL ".$sql;*/
-
     // Esegui la query di eliminazione
     $sql = "DELETE FROM accounts WHERE username='$id'";
     // debug. echo "comando SQL ".$sql;
@@ -98,12 +99,12 @@ $sql = "SELECT * FROM accounts ORDER BY " . $order . " " . $direction;
 //$sql = "SELECT * FROM accounts";
 $result = mysqli_query($conn, $sql);
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
     <title>GASL gestione utenti</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <?php require 'navbar.php';?>
@@ -127,7 +128,7 @@ $result = mysqli_query($conn, $sql);
                 <div class="row">
                     <div class="col-md-4">
                         <label for="username">Username:</label>
-                        <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
+                        <input type="text" class="form-control" name="username" id="username" autocomplete="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
                         <span id="username-error" class="text-danger"></span>
                     </div>
                     <div class="col-md-8">
@@ -153,7 +154,7 @@ $result = mysqli_query($conn, $sql);
                 <div class="row">
                     <div class="col-md-4">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password" required>
+                        <input type="password" class="form-control" name="password" id="password" autocomplete="current-password" required>
                     </div>
                     <div class="col-md-8">
                         <label for="note">Note:</label>

@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="password" class="form-control" id="password" name="password" autocomplete="current-password" required>
                     </div>
                     <?php if (!$error_message == "") : ?>
-                    <div class="alert alert-danger"><?php echo $error_message; ?></div>
+                    <div  id="error_message" class="alert alert-danger" role="alert"><?php echo $error_message; ?></div>
                     <?php endif; ?>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
@@ -128,5 +128,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <!-- fa sparire il messaggio di errore dopo qualche secondo -->
+    <script>
+        // trovo il riferimento al messaggio di errore
+        var errorMessage = document.getElementById("error_message");
+        
+        // il messaggio scompare in dissolvenza dopo 5 secondi
+        setTimeout(function() {
+            errorMessage.style.opacity='0';
+            errorMessage.style.height='0';
+            errorMessage.style.padding='0';
+        }, 5000);
+    </script>
 </body>
 </html>

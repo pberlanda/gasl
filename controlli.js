@@ -49,6 +49,3 @@ function verificaDisponibilitaEmail() {
     };
     xhr.send();
 }
-
-
-

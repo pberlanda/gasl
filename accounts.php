@@ -99,6 +99,13 @@ $direction = isset($_GET['direction']) ? $_GET['direction'] : 'asc'; // Ordiname
 $sql = "SELECT * FROM accounts ORDER BY " . $order . " " . $direction;
 //$sql = "SELECT * FROM accounts";
 $result = mysqli_query($conn, $sql);
+
+// gestione errori query
+if (!$result) {
+    echo "Errore! " . mysqli_error($link);
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="it">

@@ -62,8 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     /*echo "utente da inserire ".$id;
     echo "comando SQL ".$sql;*/
     // Esegui la query di inserimento
-    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2, note)
-            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1', '$tel2', '$note')";
+    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2, note, tipo)
+            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1', '$tel2', '$note', 'S')";
+    
+    // debug
+    //var_dump($sql);
     mysqli_query($conn, $sql);
 }
 

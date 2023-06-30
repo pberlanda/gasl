@@ -73,7 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 // Eliminazione di un utente
 if (isset($_GET["delete"])) {
     // id dell'utente da eliminare
-    $id = $_GET["delete"];
+    //$id = $_GET["delete"];
+    $id = filter_var($_GET["delete"], FILTER_SANITIZE_STRING);
     
     // ottengo l'id dell'utente autenticato
     $loggedinUser = $_SESSION['id'];
@@ -90,8 +91,13 @@ if (isset($_GET["delete"])) {
     
     // Esegui la query di eliminazione
     $sql = "DELETE FROM accounts WHERE username='$id'";
-    // debug. echo "comando SQL ".$sql;
-    mysqli_query($conn, $sql);
+    
+    // Esegue la query con gestione errori
+    if (!mysqli_query($conn, $sql)) {
+        $error_msg = $conn->error;
+        visualizzaErrore($error_msg);
+        exit;
+    }
 }
 
 // impostazioni per ordinamento
@@ -101,8 +107,16 @@ $direction = isset($_GET['direction']) ? $_GET['direction'] : 'asc'; // Ordiname
 // Query per selezionare tutti gli account con l'ordinamento desiderato
 $sql = "SELECT * FROM accounts ORDER BY " . $order . " " . $direction;
 //$sql = "SELECT * FROM accounts";
-$result = mysqli_query($conn, $sql);
 
+// se la query fallisce termina
+if (!mysqli_query($conn, $sql)) {
+    $error_msg = $conn->error;
+    visualizzaErrore($error_msg);
+    exit;
+}
+
+// salva il result set della query
+$result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -211,3 +225,4 @@ $result = mysqli_query($conn, $sql);
     <script src="controlli.js"></script>
 </body>
 </html>
+<php? mysqli_close ?>

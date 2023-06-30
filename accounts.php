@@ -8,9 +8,6 @@ include 'securityUtils.php';
 
 $action = htmlspecialchars($_SESSION['logged_in']);
 
-//echo var_dump('ciao '.$action);
-//echo "<script>console.log('$action')</script>";
-
 // Verifica se l'utente è autenticato
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: login.php');
@@ -62,11 +59,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     /*echo "utente da inserire ".$id;
     echo "comando SQL ".$sql;*/
     // Esegui la query di inserimento
-    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2, note)
-            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1', '$tel2', '$note')";
-    mysqli_query($conn, $sql);
-}
+    $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2, note, tipo)
+            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1', '$tel2', '$note', 'S')";
+    
+    // debug
+    //var_dump($conn. " ".$sql);
+    if (!mysqli_query($conn, $sql)) {
+        visualizzaErrore($conn->error);
+        exit;
+        }
 
+    }
 // Eliminazione di un utente
 if (isset($_GET["delete"])) {
     // id dell'utente da eliminare
@@ -99,12 +102,6 @@ $direction = isset($_GET['direction']) ? $_GET['direction'] : 'asc'; // Ordiname
 $sql = "SELECT * FROM accounts ORDER BY " . $order . " " . $direction;
 //$sql = "SELECT * FROM accounts";
 $result = mysqli_query($conn, $sql);
-
-// gestione errori query
-if (!$result) {
-    echo "Errore! " . mysqli_error($link);
-    exit;
-}
 
 ?>
 <!DOCTYPE html>
@@ -214,8 +211,3 @@ if (!$result) {
     <script src="controlli.js"></script>
 </body>
 </html>
-
-<?php
-// Chiudi la connessione al database
-mysqli_close($conn);
-?>

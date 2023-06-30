@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $tel1 = filter_input(INPUT_POST, 'tel1', FILTER_SANITIZE_STRING);
     $tel2 = filter_input(INPUT_POST, 'tel2', FILTER_SANITIZE_STRING);
     $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_STRING);
+    $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
     
     // controlla se lo username è già stato usato da un altro utente
     if (verificaUsernameUtilizzato($conn, $username)) {
@@ -60,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     echo "comando SQL ".$sql;*/
     // Esegui la query di inserimento
     $sql = "INSERT INTO accounts (nome, cognome, username, password, email, telefono_1, telefono_2, note, tipo)
-            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1', '$tel2', '$note', 'S')";
+            VALUES ('$nome', '$cognome', '$username', '$password', '$email', '$tel1', '$tel2', '$note', '$tipo')";
     
     // debug
     //var_dump($conn. " ".$sql);
@@ -133,13 +134,20 @@ $result = mysqli_query($conn, $sql);
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="mb-4">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label for="nome">Nome:</label>
                         <input type="text" class="form-control" name="nome" id="nome" required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label for="cognome">Cognome:</label>
                         <input type="text" class="form-control" name="cognome" id="cognome" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="tipo">Tipo:</label>
+                        <select id="tipo" name="tipo" class="form-control" required>
+                            <option value="S">Studente</option>
+                            <option value="A">Admin</option>
+                        </select>
                     </div>
                 </div>
             </div>

@@ -51,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $tel1 = filter_input(INPUT_POST, 'tel1', FILTER_SANITIZE_STRING);
     $tel2 = filter_input(INPUT_POST, 'tel2', FILTER_SANITIZE_STRING);
     $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_STRING);
+    $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
     
     // verifica se username è già stato utilizzato
 //    if (verificaUsernameUtilizzato($conn, $username)) {
@@ -60,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 //    }
 
     // Esegui l'aggiornamento dell'utente nel database
-    $sql = "UPDATE accounts SET nome='$nome', cognome='$cognome', username='$username', email='$email', telefono_1='$tel1', telefono_2='$tel2', note='$note' WHERE username='$id'";
+    $sql = "UPDATE accounts SET nome='$nome', cognome='$cognome', username='$username', email='$email', telefono_1='$tel1', telefono_2='$tel2', note='$note', tipo = '$tipo' WHERE username='$id'";
     mysqli_query($conn, $sql);
 
     // Reindirizza alla pagina degli utenti dopo l'aggiornamento
@@ -88,6 +89,7 @@ $email = $row["email"];
 $tel1 = $row["telefono_1"];
 $tel2 = $row["telefono_2"];
 $note = $row["note"];
+$tipo = $row["tipo"];
 ?>
 
 <!-- HTML per la pagina di modifica dell'utente -->
@@ -104,13 +106,23 @@ $note = $row["note"];
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"] . '?id=' . $id; ?>" class="mb-4">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label for="nome">Nome:</label>
                         <input type="text" class="form-control" name="nome" id="nome" value="<?php echo $nome; ?>" required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label for="cognome">Cognome:</label>
                         <input type="text" class="form-control" name="cognome" id="cognome" value="<?php echo $cognome; ?>" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="tipo">Tipo:</label>
+                        <select id="tipo" name="tipo" class="form-control">
+                            
+                            <!-- carica il tipo usando ternary operatore. Nella seconda opzione inverte valore e descrizione -->
+                            
+                            <option <?php echo ($tipo === 'A') ? 'A' : 'S'; ?>><?php echo ($tipo === 'A') ? 'Admin' : 'Studente'; ?></option>
+                            <option <?php echo ($tipo === 'A') ? 'S' : 'A'; ?>><?php echo ($tipo === 'A') ? 'Studente' : 'Admin'; ?></option>
+                        </select>
                     </div>
                 </div>
             </div>

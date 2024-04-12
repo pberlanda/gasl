@@ -119,51 +119,10 @@ $result = mysqli_query($conn, $sql);
         <h1 class="mt-4">Gestione utenti</h1>
         <h2 class="mt-4">Aggiungi un nuovo utente:</h2>
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="mb-4">
-            <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" class="form-control" name="nome" id="nome" required>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="username">Username:</label>
-                        <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()">  <!-- verifica che il nome utente sia disponibile-->
-                        <span id="username-error" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()">  <!-- verifica che l'email non sia già stata utilizzata -->
-                        <span id="email-error" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="telefono_1">Tel.:</label>
-                        <input type="telefono_1" class="form-control" name="telefono_1" id="telefono_1">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="tel2">Tel.:</label>
-                        <input type="tel2" class="form-control" name="tel2" id="tel2">
-                    </div>
-                </div>
-                <label for="cognome">Cognome:</label>
-                <input type="text" class="form-control" name="cognome" id="cognome" required>
-            </div>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()"> <!-- verifica che il nome utente sia disponibile -->
-                <span id="username-error" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary">Aggiungi</button>
+            <!-- Button to trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDataModal">
+              Add Data
+            </button>
         </form>
 
         <h2 class="mt-4">Elenco degli utenti:</h2>
@@ -205,6 +164,79 @@ $result = mysqli_query($conn, $sql);
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="controlli.js"></script>
+    
+    
+    <!-- Modal for adding data -->
+    <div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-labelledby="addDataModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addDataModalLabel">Add Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Form for adding data -->
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+
+                <!--<div class="form-group">
+                  <label for="nome">Nome:</label>
+                  <input type="text" class="form-control" name="nome" id="nome" required>
+                </div>-->
+                
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control" name="nome" id="nome" required>
+                    <label for="cognome">Cognome:</label>
+                    <input type="text" class="form-control" name="cognome" id="cognome" required>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" name="username" id="username" required onkeyup="verificaDisponibilitaUsername()">  <!-- verifica che il nome utente sia disponibile-->
+                            <span id="username-error" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" name="password" id="password" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" name="email" id="email" required onkeyup="verificaDisponibilitaEmail()">  <!-- verifica che l'email non sia già stata utilizzata -->
+                    <span id="email-error" class="text-danger"></span>
+                </div>
+
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="telefono_1">Tel.:</label>
+                            <input type="telefono_1" class="form-control" name="telefono_1" id="telefono_1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tel2">Tel.:</label>
+                            <input type="tel2" class="form-control" name="tel2" id="tel2">
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more form fields as needed -->
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    
+    
 </body>
 </html>
 
